@@ -5,7 +5,7 @@
  */
 package dk.lunar.codetest.generated.api;
 
-import dk.lunar.codetest.generated.model.CountableResource;
+import dk.lunar.codetest.generated.model.CountableResourceDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -36,7 +36,7 @@ public interface CountableResourcesApi {
     @RequestMapping(value = "/countable-resources",
         consumes = { "application/json" }, 
         method = RequestMethod.POST)
-    ResponseEntity<Void> addCountableResource(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody CountableResource body);
+    ResponseEntity<Void> addCountableResource(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody CountableResourceDTO body);
 
     @Operation(summary = "Find countable resource by name", description = "Returns a single countable resource", tags={ "countable-resource" })
     @ApiResponses(value = { 
@@ -59,7 +59,7 @@ public interface CountableResourcesApi {
     @RequestMapping(value = "/countable-resources/{name}",
         consumes = { "application/json" }, 
         method = RequestMethod.PUT)
-    ResponseEntity<Void> updateCountableResource(@Size(min=3,max=20) @Parameter(in = ParameterIn.PATH, description = "The name of the countable resource", required=true, schema=@Schema()) @PathVariable("name") String name, @Parameter(in = ParameterIn.DEFAULT, description = "Countable resource object that needs to be updated", required=true, schema=@Schema()) @Valid @RequestBody CountableResource body);
+    ResponseEntity<Void> updateCountableResource(@Size(min=3,max=20) @Parameter(in = ParameterIn.PATH, description = "The name of the countable resource", required=true, schema=@Schema()) @PathVariable("name") String name, @Parameter(in = ParameterIn.DEFAULT, description = "Countable resource object that needs to be updated", required=true, schema=@Schema()) @Valid @RequestBody CountableResourceDTO body);
 
 }
 

@@ -1,10 +1,10 @@
-package dk.lunar.codetest.codetest
+package dk.lunar.codetest
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class CodetestApplicationTests {
+class CountableResourceApplicationTests {
 
 	@Test
 	void contextLoads() {

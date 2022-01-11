@@ -82,6 +82,13 @@ paths:
             type: string
             minLength: 3
             maxLength: 20
+        - in: header
+          name: If-Match
+          schema:
+            type: string
+            format: int64
+            description: ETag of the entity expected to update - will return 412 if it doesnt match ETag
+          required: true
       requestBody:
         description: Countable resource object that needs to be updated
         content:
@@ -103,6 +110,9 @@ paths:
           content: {}
         404:
           description: Countable resource not found
+          content: {}
+        412:
+          description: \'If-Match\' header did not match ETag
           content: {}
       x-codegen-request-body-name: body
 components:

@@ -2,3 +2,4 @@ rootProject.name = 'codetest'
 
 include 'countable-resource-service'
 include 'business-logic-service'
+include 'clients'

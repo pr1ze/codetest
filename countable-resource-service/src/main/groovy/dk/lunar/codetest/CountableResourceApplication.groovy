@@ -1,13 +1,13 @@
-package dk.lunar.codetest.codetest
+package dk.lunar.codetest
 
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 
 @SpringBootApplication
-class CodetestApplication {
+class CountableResourceApplication {
 
 	static void main(String[] args) {
-		SpringApplication.run(CodetestApplication, args)
+		SpringApplication.run(CountableResourceApplication, args)
 	}
 
 }
