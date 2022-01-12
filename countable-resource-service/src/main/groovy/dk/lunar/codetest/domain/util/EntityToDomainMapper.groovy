@@ -9,7 +9,7 @@ class EntityToDomainMapper {
         return new CountableResource(
                 name: entity.name,
                 count: entity.count,
-                eTag: entity.version
+                version: entity.version
         )
     }
 

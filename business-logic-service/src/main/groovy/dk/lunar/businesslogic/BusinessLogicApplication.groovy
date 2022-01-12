@@ -26,7 +26,7 @@ class BusinessLogicApplication {
         //Normalt ville man have 1 actor pr. resource hvis der virkelig er smæk på.
         //For at skalere horizontalt skulle man have noget middlewere som garantere at der kun er 1 af en given actor i clustered.
         //Her laves der bare 1 actor og kun for 1 resource.
-        def actor = CountableResourceActor.create('countableresource3', countableResourceApi)
+        def actor = CountableResourceActor.create('countableresourceABC', countableResourceApi)
         return ActorSystem.create(actor, "codetest")
     }
 

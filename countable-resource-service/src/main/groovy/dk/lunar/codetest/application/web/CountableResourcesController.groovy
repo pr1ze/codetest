@@ -60,7 +60,7 @@ class CountableResourcesController implements CountableResourcesApi {
                 new CountableResource(
                         name: body.name,
                         count: body.count,
-                        eTag: request.getHeader(HttpHeaders.IF_MATCH)
+                        version: request.getHeader(HttpHeaders.IF_MATCH)
                 )
         )
 

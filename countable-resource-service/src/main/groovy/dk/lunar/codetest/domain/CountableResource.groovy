@@ -8,10 +8,10 @@ import groovy.transform.Immutable
 class CountableResource {
     String name
     long count
-    String eTag
+    String version
 
     def md5() {
-        return "$name$count$eTag".md5()
+        return "$name$count$version".md5()
     }
 
 }

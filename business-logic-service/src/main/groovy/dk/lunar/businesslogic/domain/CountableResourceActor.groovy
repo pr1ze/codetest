@@ -101,13 +101,13 @@ class CountableResourceActor extends AbstractBehavior<CountableResourceActorMsg>
      * @param count
      * @return ETag for the resource
      */
-    private createAndSetCountableResource() {
-        currentCountableResource = new CountableResource(name: countableResourceName, count: 1)
-        context.log.info("Creating resource {} with count {}", currentCountableResource, 1)
+    private void createAndSetCountableResource() {
+        currentCountableResource = new CountableResource(name: countableResourceName, count: 0)
+        context.log.info("Creating or getting resource {}", currentCountableResource, 0)
 
         try {
             ApiResponse<Void> response = countableResourceApi.addCountableResourceWithHttpInfo(currentCountableResource)
-            return response.getHeaders()['ETag'].first() - "\"" - "\""
+            currentETag = response.getHeaders()['ETag'].first() - "\"" - "\""
         } catch (ApiException e) {
             if (e.code == 409) {
                 context.log.error("Resource already exists - [httpStatus: ${e.code}, body: ${e.responseBody}]")

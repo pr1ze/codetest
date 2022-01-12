@@ -38,7 +38,6 @@ Interessant klasser/directories at kigge i:
 
 ## Test og bevis af samtidighedsproblemer at løst
 Se `business-logic-service/test/groovy/dk.lunar.businesslogic/domain/CountableResourceServiceSpec.groovy`
-Der er et lille problem tilbage et sted i forhold til ETag headers, så testen kører ikke pt. Løb tør for tid.
 
 ## Clients
 Der ligger udover det et clients lib, som er genereret ud fra swagger filen for at integrere

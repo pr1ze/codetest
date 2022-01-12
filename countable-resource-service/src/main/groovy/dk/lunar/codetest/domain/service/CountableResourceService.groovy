@@ -35,8 +35,7 @@ class CountableResourceService {
         try {
             CountableResourceEntity newEntity = countableResourceRepository.save(new CountableResourceEntity(
                     name: name,
-                    count: count,
-                    version: 1
+                    count: count
             ))
 
             return toDomain(newEntity)
@@ -58,7 +57,7 @@ class CountableResourceService {
         CountableResourceEntity persisted = countableResourceRepository.findByName(updated.name)
                 .orElseThrow(() -> new NoSuchElementException())
 
-        if (updated.eTag != toDomain(persisted).md5()) {
+        if (updated.version != toDomain(persisted).md5()) {
             //Catched and handled by GlobalExceptionHandler.groovy - returning 412 - Precondition failed
             throw new OptimisticLockException()
         }
@@ -67,6 +66,7 @@ class CountableResourceService {
         persisted.name = updated.name
 
         persisted = countableResourceRepository.save(persisted)
+        persisted.version++
 
         return toDomain(persisted)
     }

@@ -24,7 +24,7 @@ class CountableResourceServiceSpec extends Specification {
     @Unroll
     void "Bevis at samtidighed håndteres korrekt, og at ingen opdatering bliver tabt"() {
         given: 'Opret #incrementersCount incrementers og #decrementersCount decrementers'
-        int currentCount = getCurrentCount()
+        int countBeforeStarting = getCurrentCount()
 
         Collection<Callable> incrementers = []
         Collection<Callable> decrementers = []
@@ -49,24 +49,25 @@ class CountableResourceServiceSpec extends Specification {
             }
         }
 
-        when: 'Udfør alle på en gang'
+        when: 'Udfør alle samtidigt'
         def futures = threadPool.invokeAll(incrementers + decrementers)
 
         and: 'Vent på at alle er færdige'
         futures.each { it.get() }
 
         then: 'Så passer forrige count + expected - som beviser at samtidigheden er håndteret korrekt'
-        getCurrentCount() == currentCount + expected
+        getCurrentCount() == countBeforeStarting + expected
 
         where:
         incrementersCount | decrementersCount | expected
-        500               | 200               | 300
-        200               | 100               | 100
+        50                | 20                | 30
+        70                | 100               | -30
+        10                | 5                 | 5
     }
 
     private int getCurrentCount() {
         try {
-            return countableResourceApi.getCountableResourceByName('countableresource1').count
+            return countableResourceApi.getCountableResourceByName('countableresourceABC').count
         } catch (e) {
             return 0
         }

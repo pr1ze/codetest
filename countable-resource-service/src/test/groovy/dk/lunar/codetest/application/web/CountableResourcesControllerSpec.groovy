@@ -46,7 +46,7 @@ class CountableResourcesControllerSpec extends Specification {
                         .content(countableResourceDTOJson))
 
         then:
-        1 * countableResourceService.create('some-name', 1337) >> new CountableResource(name: 'some-name', count: 1337, eTag: 123)
+        1 * countableResourceService.create('some-name', 1337) >> new CountableResource(name: 'some-name', count: 1337, version: 123)
         response.andExpect(MockMvcResultMatchers.status().isCreated())
         response.andReturn().response.getHeader('ETag') == "\"123\""
     }
