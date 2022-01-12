@@ -13,7 +13,6 @@ import javax.persistence.LockModeType
 import javax.persistence.OptimisticLockException
 import javax.transaction.Transactional
 
-import static dk.lunar.codetest.domain.util.DomainToEntityMapper.toEntity
 import static dk.lunar.codetest.domain.util.EntityToDomainMapper.toDomain
 
 @Service
@@ -36,7 +35,8 @@ class CountableResourceService {
         try {
             CountableResourceEntity newEntity = countableResourceRepository.save(new CountableResourceEntity(
                     name: name,
-                    count: count
+                    count: count,
+                    version: 1
             ))
 
             return toDomain(newEntity)
@@ -58,12 +58,15 @@ class CountableResourceService {
         CountableResourceEntity persisted = countableResourceRepository.findByName(updated.name)
                 .orElseThrow(() -> new NoSuchElementException())
 
-        if (updated.eTag != persisted.version) {
+        if (updated.eTag != toDomain(persisted).md5()) {
             //Catched and handled by GlobalExceptionHandler.groovy - returning 412 - Precondition failed
             throw new OptimisticLockException()
         }
 
-        persisted = countableResourceRepository.save(toEntity(updated))
+        persisted.count = updated.count
+        persisted.name = updated.name
+
+        persisted = countableResourceRepository.save(persisted)
 
         return toDomain(persisted)
     }

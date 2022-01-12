@@ -57,7 +57,7 @@ public class CountableResourceApiTest {
     @Test
     public void getCountableResourceByNameTest() throws Exception {
         String name = null;
-        api.getCountableResourceByName(name);
+        CountableResource response = api.getCountableResourceByName(name);
 
         // TODO: test validations
     }

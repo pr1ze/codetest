@@ -56,7 +56,7 @@ public class CountableResourceDTO {
   @Schema(required = true, description = "")
       @NotNull
 
-  @Min(1L)  public Long getCount() {
+  public Long getCount() {
     return count;
   }
 

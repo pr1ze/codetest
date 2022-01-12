@@ -9,4 +9,9 @@ class CountableResource {
     String name
     long count
     String eTag
+
+    def md5() {
+        return "$name$count$eTag".md5()
+    }
+
 }

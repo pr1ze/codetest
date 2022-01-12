@@ -5,11 +5,11 @@ import dk.lunar.codetest.infrastructure.ports.entities.CountableResourceEntity
 
 class DomainToEntityMapper {
 
-    static CountableResourceEntity toEntity(CountableResource entity) {
+    static CountableResourceEntity toEntity(Long id, CountableResource entity) {
         return new CountableResourceEntity(
+                id: id,
                 name: entity.name,
-                count: entity.count,
-                version: Integer.parseInt(entity.eTag) // Casting should be more defensive in a real world example
+                count: entity.count
         )
     }
 

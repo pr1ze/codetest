@@ -34,7 +34,7 @@ paths:
           description: Bad Request
           content: {}
         409:
-          description: Conflict
+          description: Conflict - Name already exists
           content: {}
       x-codegen-request-body-name: body
   /countable-resources/{name}:
@@ -56,12 +56,15 @@ paths:
       responses:
         200:
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CountableResource'
           headers:
             ETag:
               description: Entity Tag to identify resource revsion.
               schema:
                 type: object
-          content: {}
         400:
           description: Invalid name supplied
           content: {}
@@ -111,6 +114,9 @@ paths:
         404:
           description: Countable resource not found
           content: {}
+        409:
+          description: Conflict - Name already exists
+          content: {}
         412:
           description: \'If-Match\' header did not match ETag
           content: {}
@@ -128,6 +134,5 @@ components:
           maxLength: 20
           type: string
         count:
-          minimum: 1
           type: integer
           format: int64

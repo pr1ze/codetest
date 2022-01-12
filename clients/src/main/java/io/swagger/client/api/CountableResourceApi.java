@@ -196,7 +196,7 @@ public class CountableResourceApi {
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
         final String[] localVarAccepts = {
-            
+            "application/json"
         };
         final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
@@ -243,22 +243,25 @@ public class CountableResourceApi {
      * Find countable resource by name
      * Returns a single countable resource
      * @param name The name of the countable resource (required)
+     * @return CountableResource
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public void getCountableResourceByName(String name) throws ApiException {
-        getCountableResourceByNameWithHttpInfo(name);
+    public CountableResource getCountableResourceByName(String name) throws ApiException {
+        ApiResponse<CountableResource> resp = getCountableResourceByNameWithHttpInfo(name);
+        return resp.getData();
     }
 
     /**
      * Find countable resource by name
      * Returns a single countable resource
      * @param name The name of the countable resource (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return ApiResponse&lt;CountableResource&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<Void> getCountableResourceByNameWithHttpInfo(String name) throws ApiException {
+    public ApiResponse<CountableResource> getCountableResourceByNameWithHttpInfo(String name) throws ApiException {
         com.squareup.okhttp.Call call = getCountableResourceByNameValidateBeforeCall(name, null, null);
-        return apiClient.execute(call);
+        Type localVarReturnType = new TypeToken<CountableResource>(){}.getType();
+        return apiClient.execute(call, localVarReturnType);
     }
 
     /**
@@ -269,7 +272,7 @@ public class CountableResourceApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getCountableResourceByNameAsync(String name, final ApiCallback<Void> callback) throws ApiException {
+    public com.squareup.okhttp.Call getCountableResourceByNameAsync(String name, final ApiCallback<CountableResource> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -291,7 +294,8 @@ public class CountableResourceApi {
         }
 
         com.squareup.okhttp.Call call = getCountableResourceByNameValidateBeforeCall(name, progressListener, progressRequestListener);
-        apiClient.executeAsync(call, callback);
+        Type localVarReturnType = new TypeToken<CountableResource>(){}.getType();
+        apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
     /**
